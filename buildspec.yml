@@ -39,8 +39,7 @@ phases:
   post_build:
     commands:
       - echo Checking SonarQube Quality Gate...
-      - > 
-        STATUS=$(curl -s -u $SONAR_TOKEN: $SONAR_HOST_URL/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY | jq -r .projectStatus.status)
+      - STATUS=$(curl -s -u $SONAR_TOKEN: $SONAR_HOST_URL/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY | jq -r .projectStatus.status)
       - echo Quality Gate status: $STATUS
       - if [[ "$STATUS" != "OK" ]]; then exit 1; fi
 
