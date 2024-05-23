@@ -21,7 +21,7 @@ phases:
     commands:
       - echo "Build phase ..."
    
-      - sonar-scanner -Dsonar.projectKey=test -Dsonar.sources=. -Dsonar.host.url=http://13.232.214.11:9000 -Dsonar.login=sqp_fa8e6b8b7cabc9af052501cf1a3548858b0e569a
+     - sonar-scanner  -Dsonar.projectKey=test  -Dsonar.sources=.  -Dsonar.host.url=http://13.201.61.88:9000 -Dsonar.login=sqp_b34cf06a7371768050b4f62b1fccb6173f82b2a0
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
