@@ -28,12 +28,12 @@ phases:
       - echo Starting build phase...
       - ./gradlew build # or your preferred build command
       - echo Running SonarQube analysis...
-      - sonar-scanner -Dsonar.projectKey=test1-Dsonar.sources=. -Dsonar.host.url=//13.201.38.240:9000 -Dsonar.login=sqp_30cf87fbd8270d62c57ae7cfb32d0f34540e4182
+      - sonar-scannersonar-scanner -Dsonar.projectKey=test1 -Dsonar.sources=. -Dsonar.host.url=http://13.232.122.71:9000 -Dsonar.login=sqp_92131e9cb98509bf1a1d3146658dca1989ab775f
 
   post_build:
     commands:
       - echo Checking SonarQube Quality Gate...
-      - STATUS=$(curl -s -u $SONAR_TOKEN: $SONAR_HOST_URL/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY | jq -r .projectStatus.status)
+      - STATUS=$(curl -s -u $SONAR_TOKEN: //13.201.38.240:9000/api/qualitygates/project_status?projectKey=test1 | jq -r .projectStatus.status)
       - echo Quality Gate status: $STATUS
       - if [[ "$STATUS" != "OK" ]]; then exit 1; fi
 
