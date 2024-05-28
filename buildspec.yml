@@ -28,11 +28,7 @@ phases:
       - echo Starting build phase...
       - ./gradlew build # or your preferred build command
       - echo Running SonarQube analysis...
-      - sonar-scanner \
-          -Dsonar.projectKey=test1\
-          -Dsonar.sources=. \
-          -Dsonar.host.url=//13.201.38.240:9000 \
-          -Dsonar.login=sqp_30cf87fbd8270d62c57ae7cfb32d0f34540e4182
+      - sonar-scanner -Dsonar.projectKey=test1-Dsonar.sources=. -Dsonar.host.url=//13.201.38.240:9000 -Dsonar.login=sqp_30cf87fbd8270d62c57ae7cfb32d0f34540e4182
 
   post_build:
     commands:
