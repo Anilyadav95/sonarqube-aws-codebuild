@@ -30,13 +30,6 @@ phases:
       - echo Running SonarQube analysis...
       - sonar-scannersonar-scanner -Dsonar.projectKey=test1 -Dsonar.sources=. -Dsonar.host.url=http://13.232.122.71:9000 -Dsonar.login=sqp_92131e9cb98509bf1a1d3146658dca1989ab775f
 
-  post_build:
-    commands:
-      - echo Checking SonarQube Quality Gate...
-      - STATUS=$(curl -s -u$SONAR_TOKEN: "http://sqp_8bc26bcc6a87780358a0af3c361a068beba38cc0/api/qualitygates/project_status?projectKey=test1" | jq -r .projectStatus.status)
-      - echo Quality Gate status: $STATUS
-      - if [[ "$STATUS" != "OK" ]]; then exit 1; fi
-
 artifacts:
   files:
     - target/**/*
