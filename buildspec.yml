@@ -2,12 +2,12 @@ version: 0.2
 
 env:
   variables:
-    SONAR_HOST_URL: "http://3.110.130.90:9000"
+    SONAR_HOST_URL: "http://3.110.222.70:9000"
     SONAR_PROJECT_KEY: "Sonarqube"
     SONAR_PROJECT_NAME: "Sonarqube"
     SONAR_PROJECT_VERSION: "1.0"
     SONAR_SCANNER_VERSION: "4.6.0.2311"
-    SONAR_TOKEN: "sqp_8bc26bcc6a87780358a0af3c361a068beba38cc0"
+    SONAR_TOKEN: "sqp_fedc10e5c21db49ba6017376e3aaad11e5cf1f2f"
 
 phases:
   install:
