@@ -27,7 +27,7 @@ phases:
     commands:
       - echo Starting build phase...
       - echo Running SonarQube analysis...
-      - sonar-scannersonar-scanner -Dsonar.projectKey=new-aws -Dsonar.sources=. -Dsonar.host.url=http://3.110.222.70:9000 -Dsonar.login=sqp_fedc10e5c21db49ba6017376e3aaad11e5cf1f2f
+      - sonar-scanner -Dsonar.projectKey=new-aws -Dsonar.sources=. -Dsonar.host.url=http://3.110.222.70:9000 -Dsonar.login=sqp_fedc10e5c21db49ba6017376e3aaad11e5cf1f2f
 
 artifacts:
   files:
