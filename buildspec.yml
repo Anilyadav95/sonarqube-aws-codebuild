@@ -1,39 +1,31 @@
 version: 0.2
 
-env:
-  variables:
-    SONAR_HOST_URL: "http://3.110.222.70:9000"
-    SONAR_PROJECT_KEY: "Sonarqube"
-    SONAR_PROJECT_NAME: "Sonarqube"
-    SONAR_PROJECT_VERSION: "1.0"
-    SONAR_SCANNER_VERSION: "4.6.0.2311"
-    SONAR_TOKEN: "sqp_fedc10e5c21db49ba6017376e3aaad11e5cf1f2f"
-
 phases:
   install:
-    runtime-versions:
-      java: corretto11 # Use the appropriate Java version for your project
     commands:
-      - echo Installing SonarQube Scanner...
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux.zip
-      - unzip sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux.zip
-      - export PATH=$PATH:$(pwd)/sonar-scanner-${SONAR_SCANNER_VERSION}-linux/bin
-
+      - echo "Install phase ..."
+    runtime-versions:
+      nodejs: 16
   pre_build:
     commands:
-      - echo Starting pre-build phase...
-
+      - echo "Pre build phase ..."
+      - apt-get update
+      - apt-get install -y jq
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+      - echo "Current path is >>>"
+      - sh $pwd
+      - unzip ./sonar-scanner-cli-4.7.0.2747-linux.zip
+      - ls $pwd
+      - export PATH=$PATH:./sonar-scanner-4.7.0.2747-linux/bin/
   build:
     commands:
-      - echo Starting build phase...
-      - echo Running SonarQube analysis...
-      #- sonar-scanner -Dsonar.projectKey=new-aws -Dsonar.sources=. -Dsonar.host.url=http://3.110.222.70:9000 -Dsonar.login=sqp_fedc10e5c21db49ba6017376e3aaad11e5cf1f2f
-      - sonar-scanner -Dsonar.projectKey=new-aws -Dsonar.sources=. -Dsonar.host.url=http://3.110.222.70:9000 -Dsonar.login=sqp_fedc10e5c21db49ba6017376e3aaad11e5cf1f2f 
-artifacts:
-  files:
-    - target/**/*
-
-cache:
-  paths:
-    - '/root/.m2/**/*'
-    - 'sonar-scanner-${SONAR_SCANNER_VERSION}-linux/**/*'
+      - echo "Build phase ..."
+   
+      - sonar-scanner -Dsonar.projectKey=Sonarqube -Dsonar.sources=. -Dsonar.host.url=http://3.110.222.70:9000 -Dsonar.login=sqp_1926e822e273983dac03f8421e7ab39f88a7cebf 
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
+      - cat result.json
+      - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
+  post_build:
+    commands:
+      - echo "Post build phase ..."
