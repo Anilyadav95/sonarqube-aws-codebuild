@@ -20,8 +20,8 @@ phases:
   build:
     commands:
       - echo "Build phase ..."
-      - mvn clean verify sonar:sonar -Dsonar.projectKey=project-1 -Dsonar.projectName='project-1' -Dsonar.host.url=http://13.232.93.3:9000 -Dsonar.token=sqp_ccc0954f8810912b6a6fbdfcd016587e931ff77d
-      #- sonar-scanner -Dsonar.projectKey=Sonarqube -Dsonar.sources=. -Dsonar.host.url=http://3.6.37.224:9000 -Dsonar.login=sqp_41d06c871adfd78297c71771f74291de79e1d6d6 
+      - cd project && mvn clean verify sonar:sonar -Dsonar.projectKey=project-1 -Dsonar.projectName='project-1' -Dsonar.host.url=http://13.232.93.3:9000 -Dsonar.token=sqp_ccc0954f8810912b6a6fbdfcd016587e931ff77d
+      - sonar-scanner -Dsonar.projectKey=Sonarqube -Dsonar.sources=. -Dsonar.host.url=http://3.6.37.224:9000 -Dsonar.login=sqp_41d06c871adfd78297c71771f74291de79e1d6d6 
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
