@@ -16,7 +16,8 @@ phases:
   build:
     commands:
       - echo "Build phase ..."
-      - sonar-scanner -Dsonar.projectKey=project-1 -Dsonar.sources=. -Dsonar.host.url=http://13.232.93.3:9000 -Dsonar.token=sqp_ccc0954f8810912b6a6fbdfcd016587e931ff77d
+      - mvn clean verify sonar:sonar -Dsonar.projectKey=project-1 -Dsonar.projectName='project-1' -Dsonar.host.url=http://13.232.93.3:9000 -Dsonar.token=sqp_ccc0954f8810912b6a6fbdfcd016587e931ff77d
+      #- sonar-scanner -Dsonar.projectKey=project-1 -Dsonar.sources=. -Dsonar.host.url=http://13.232.93.3:9000 -Dsonar.token=sqp_ccc0954f8810912b6a6fbdfcd016587e931ff77d
   post_build:
     commands:
       - echo "Post build phase ..."
