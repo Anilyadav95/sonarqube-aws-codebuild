@@ -8,10 +8,12 @@ phases:
       nodejs: 16
   pre_build:
     commands:
-      - echo "Pre build phase ..."
-      - apt-get update
-      - apt-get install -y jq
       - echo "PRE_BUILD phase ..."
+      - echo "Installing Java 17..."
+      - yum remove -y java-1.8.0-openjdk* java-11-openjdk* # Remove any previous Java versions
+      - amazon-linux-extras enable corretto17
+      - yum install -y java-17-amazon-corretto-devel
+      - java -version # Verify Java 17 is installed
       - echo "Installing SonarScanner..."
       - curl -o /opt/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
       - unzip /opt/sonar-scanner.zip -d /opt/
