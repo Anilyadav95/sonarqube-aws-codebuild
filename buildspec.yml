@@ -1,4 +1,4 @@
-version: 0.2
+xxxxxxxxxxxxxxxxversion: 0.2
 
 phases:
   install:
@@ -21,7 +21,7 @@ phases:
     commands:
       - echo "Build phase ..."
    
-      - sonar-scanner -Dsonar.projectKey=Sonarqube -Dsonar.sources=. -Dsonar.host.url=http://3.110.222.70:9000 -Dsonar.login=sqp_1926e822e273983dac03f8421e7ab39f88a7cebf 
+      - sonar-scanner -Dsonar.projectKey=project-1 -Dsonar.sources=. -Dsonar.host.url=http://13.232.93.3:9000/ -Dsonar.login=sqp_ccc0954f8810912b6a6fbdfcd016587e931ff77d 
       - sleep 5
       - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=$Project >result.json
       - cat result.json
